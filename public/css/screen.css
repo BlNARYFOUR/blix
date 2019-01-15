@@ -1,0 +1,557 @@
+@font-face {
+    font-family: "Lapsus Pro";
+    src: url('../fonts/LapsusPro-Bold.otf');
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+body {
+    background-color: #143642;
+    color: #FDFFFC;
+    font-family: "Trebuchet MS", sans-serif;
+}
+
+header {
+    max-width: 650px;
+    margin: auto;
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+body.activeGame header {
+    display: none;
+}
+
+h1 {
+    color: #B7173F;
+    font-family: "Lapsus Pro", sans-serif;
+    font-size: 200px;
+    text-align: center;
+    text-shadow: 5px 5px #5A0017;
+}
+
+main {
+    width: 100%;
+    height: 100%;
+}
+
+#preGameContainer {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #065373;
+    border-radius: 10px;
+    box-shadow: 5px 5px 2px #012534;
+}
+
+form {
+    width: 350px;
+    height: 160px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+form input {
+    height: 30.95%;
+    line-height: 30.95%;
+    width: 77.95%;
+    padding: 0 10px 0 10px;
+    margin: 10px;
+    box-sizing: border-box;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 5px 5px 2px #004461;
+    font-size: 28px;
+}
+
+form input::placeholder {
+    color: #143642;
+}
+
+input:focus{
+    outline: none;
+}
+
+form input[type='submit'] {
+    color: #FDFFFC;
+    font-weight: bold;
+    font-size: 30px;
+    background-color: #5DB7DE;
+    cursor: pointer;
+}
+
+#mobileWarning {
+    display: none;
+    text-align: center;
+    width: 480px;
+    font-size: 30px;
+    font-family: "Trebuchet MS", sans-serif;
+}
+
+#gameContainer {
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+}
+
+#playingField, #overlay {
+    width: 100%;
+    height: 100%;
+}
+
+#overlay {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#overlay.hidden {
+    display: none;
+}
+
+#statsContainer {
+    display: block;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    background-color: #065373;
+    border-radius: 10px;
+    box-shadow: 5px 5px 2px #012534;
+    opacity: 0.9;
+}
+
+#statsContainer ul {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#statsContainer ul li span {
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
+#statsContainer ul li:first-of-type, #statsContainer ul li:last-of-type {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#mapContainer {
+    display: block;
+    position: absolute;
+    bottom: 10px;
+    left: 5px;
+    width: 25.25vh;
+    height: 25.25vh;
+    background-color: #065373;
+    border-radius: 10px;
+    box-shadow: 5px 5px 2px #012534;
+    opacity: 0.9;
+}
+
+#map {
+    width: 23.56vh;
+    height: 23.56vh;
+    margin: 0.88vh;
+    background-color: #216D8E;
+    border-color: #065373;
+}
+
+.panel {
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    box-shadow: 5px 5px 2px #012534;
+    background-color: #095E82;
+    border-radius: 5px;
+    width: 0;
+    text-overflow: clip;
+    white-space: nowrap;
+    opacity: 0.9;
+    color: #FDFFFC;
+}
+
+.pTransition {
+    transition: 0.75s;
+    -moz-transition: 0.75s;
+    -webkit-transition: 0.75s;
+}
+
+.fade {
+    opacity: 0;
+}
+
+main.mobile .panel {
+    display: none;
+}
+
+.panel .pHeader h2 {
+    width: calc(100% - 24px);
+    height: calc(62px - 24px);
+    line-height: calc(62px - 24px);
+    background-color: #065373;
+    font-weight: bold;
+    font-family: "Trebuchet MS", sans-serif;
+    font-size: 25px;
+    box-shadow: 0 5px 2px #004461;
+    border-radius: 5px;
+    opacity: 0;
+    overflow: hidden;
+}
+
+.panel .pContent {
+    opacity: 0;
+    overflow: hidden;
+}
+
+.panel .pContent ul li {
+    display: block;
+    width: 100%;
+}
+
+.panel .pContent h3 {
+    font-weight: bold;
+    font-style: italic;
+    font-size: 20px;
+    padding: 10px 0;
+}
+
+.panel .pContent h3:first-of-type {
+    padding-top: 0;
+}
+
+.panel .pContent ul li > span {
+    display: inline-block;
+    overflow: hidden;
+    width: 180px;
+}
+
+.panel .pHeader .settingsIcon {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    display: block;
+    width: 38px;
+    height: 38px;
+    background: no-repeat url("../media/settingsMainBlue.png");
+    background-size: contain;
+    cursor: pointer;
+}
+
+.panel .sPadding {
+    padding: 12px;
+}
+
+.panel.sActive {
+    width: 300px;
+}
+
+.panel.sActive .pContent {
+    opacity: 1;
+}
+
+.panel.sActive .pHeader h2 {
+    opacity: 1;
+}
+
+.panel.sActive .pHeader .settingsIcon {
+    transform: rotate(-360deg);
+    -webkit-transform: rotate(-360deg);
+    -ms-transform: rotate(-360deg);
+    -moz-transform: rotate(-360deg);
+}
+
+.slideButton {
+    position: relative;
+    margin-left: -3px;
+}
+
+.slideButton .slide {
+    background-color: #004461;
+    display: block;
+    width: 42px;
+    height: 16px;
+    border-radius: 8px;
+   margin: 5px 0;
+}
+
+.slideButton .cross {
+    position: relative;
+    float: right;
+    transform: rotate(45deg);
+    margin-right: 12px;
+    margin-top: 2px;
+}
+
+.slideButton .cross span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    background-color: #5DB7DE;
+    width: 4px;
+    height: 12px;
+    margin-top: -4px;
+    margin-left: 4px;
+}
+
+.slideButton .cross span:last-of-type {
+    width: 12px;
+    height: 4px;
+    margin-top: 0;
+    margin-left: 0;
+}
+
+.slideButton .check {
+    position: relative;
+    float: left;
+    transform: rotate(45deg);
+    margin-left: 11px;
+    margin-top: -1px;
+}
+
+.slideButton .check span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    background-color: #5DB7DE;
+    width: 4px;
+    height: 12px;
+    margin-left: 4px;
+}
+
+.slideButton .check span:last-of-type {
+    width: 8px;
+    height: 4px;
+    margin-top: 8px;
+    margin-left: 0;
+}
+
+.slideButton.disabled {
+    filter: brightness(85%);
+    opacity: 0.7;
+}
+
+.slideButton .button {
+    position: absolute;
+    left: 0;
+    top: 1px;
+    background-color: #5DB7DE;
+    display: block;
+    width: 22px;
+    height: 22px;
+    border-radius: 11px;
+    box-shadow: 1px 1px 0 #004461;
+    transition: 0.25s;
+    -moz-transition: 0.25s;
+    -webkit-transition: 0.25s;
+}
+
+.slideButton .button.active {
+    margin-left: 19px;
+}
+
+.slideButton.disabled .button.active {
+    margin-left: 0;
+}
+
+#settingsIcon.hidden {
+    display: none;
+}
+
+#leaderboard li ul li {
+    display: inline-block;
+    width: 157px;
+    margin-right: 18px;
+    text-overflow: clip;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+#leaderboardPanel {
+    transition: opacity 0.5s;
+    -moz-transition: opacity 0.5s;
+    -webkit-transition: opacity 0.5s;
+}
+
+#leaderboard li ul li:first-of-type {
+    width: 25px;
+}
+
+#leaderboard li ul li:last-of-type {
+    width: 50px;
+}
+
+#gameOverOverlay {
+    display: none;
+    background-color: #004461;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: opacity 0.5s;
+    -moz-transition: opacity 0.5s;
+    -webkit-transition: opacity 0.5s;
+}
+
+#gameOverOverlay h2 {
+    font-size: 150px;
+    font-family: "Lapsus Pro", sans-serif;
+    font-weight: bold;
+    text-align: center;
+    padding-top: 150px;
+    text-shadow: 5px 5px #424242;
+}
+
+#gameOverInner {
+    height: 450px;
+    background-color: #1C7EA9;
+    width: 100vw;
+}
+
+#gameOverInner ul {
+    text-align: center;
+}
+
+#gameOverInner ul li {
+    display: inline-block;
+    font-family: "Trebuchet MS", sans-serif;
+    font-size: 35px;
+    padding: 18px;
+    margin-top: 30px;
+}
+
+#gameOverInner ul li span {
+    padding: 5px;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+#gameOverOverlay.active {
+    display: block;
+}
+
+body.activeGame main #gameContainer {
+    display: block;
+    /*background-color: #143642;*/
+}
+
+body.background main #gameContainer {
+    background-color: #143642;
+}
+
+main.mobile {
+    border-radius: 5px;
+}
+
+main.mobile form {
+    display: none;
+}
+
+main.mobile #mobileWarning {
+    display: block;
+    padding: 15px;
+}
+
+@media only screen and (max-width: 600px) {
+    header {
+        position: inherit;
+        top: 0;
+        left: 0;
+        transform: none;
+        padding-top: 27px;
+    }
+
+    h1 {
+        font-size: 33vw;
+    }
+
+    main form {
+        width: 78vw;
+    }
+
+    form input {
+        font-size: 25px;
+    }
+
+    form input[type='submit'] {
+        font-size: 27px;
+    }
+
+    main.mobile #mobileWarning {
+        width: 78vw;
+        font-size: 5vw;
+    }
+}
+
+@media only screen and (min-width: 1920px) {
+    header {
+        max-width: 75vw;
+    }
+
+    h1 {
+        font-size: 10.4166vw;
+    }
+
+    form {
+        width: 18.229166vw;
+        height: 8.33vw;
+    }
+
+    form input {
+        padding: 0 0.5vw 0 0.5vw;
+        margin: 0.5vw;
+        font-size: 1.45833vw;
+    }
+
+    form input[type='submit'] {
+        font-size: 1.5625vw;
+    }
+}
+
+@media only screen and (orientation: landscape) and (max-height: 600px) {
+    header {
+        position: inherit;
+        top: 0;
+        left: 0;
+        transform: none;
+        padding-top: 8px;
+    }
+
+    h1 {
+        font-size: 15vw;
+    }
+
+    main form {
+        width: 50vw;
+    }
+
+    form input {
+        font-size: 3vw;
+    }
+
+    form input[type='submit'] {
+        font-size: 3.1vw;
+    }
+
+    main.mobile #mobileWarning {
+        width: 50vw;
+        font-size: 3vw;
+    }
+}
