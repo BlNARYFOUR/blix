@@ -6,9 +6,6 @@ Blix.io is a schoolproject on Laravel, websockets, canvas and Vue.JS.
 
 The latest Production version is available on the ***master*** branch.
 <br>You can find the latest Development version on the ***dev*** branch.
-<br>
-<br>If you want to run this project on a virtual linux machine, that is linked with the network, 
-<br>use the version on the ***dev-vm-linked*** branch.
 
 <h3>root (/)</h3>
 
