@@ -3,12 +3,15 @@ Blix.io is a schoolproject on Laravel, websockets, canvas and Vue.JS.
 <br>This project is made by Brend Lambert (BinaryFour) in collaboration with Howest, Applied Informatics.
 
 <h2>Status of the project</h2>
+
 The latest Production version is available on the ***master*** branch.
 <br>You can find the latest Development version on the ***dev*** branch.
 <br>
 <br>If you want to run this project on a virtual linux machine, that is linked with the network, 
 <br>use the version on the ***dev-vm-linked*** branch.
+
 <h3>root (/)</h3>
+
 On / you can find a basic homepage.
 <br>When you press 'PLAY' (and the websocket connection is open, you might have to wait a bit) the username is send to the server.
 <br>If the connection was closed, it will retry to make a connection.
@@ -24,17 +27,22 @@ On / you can find a basic homepage.
 <br>Consumers are added in Game::initConsumers().
 <br>
 <br>
+
 <h4>Project Requirements</h4>
+
 <h5>UX: complete prototype</h5>
+
 * Unable to link 2 files at the same time, you can find the files in &#60;projectroot>/documentation
 
 <h5>Server technology</h5> 
+
 * Apache: see &#60;projectroot>/documentation
 * Digest authentication: guest, Azerty123!
 * PHP Laravel: backend framework
 * Data store: JSON: All-time highscores are saved in <projectroot>/storage/app/data.json
 
 <h5>Client technology</h5>
+
 * JavaScript: frontend
 * Vue.JS: Used for Leaderboard, stats and GameOver screen
 * JS Higher-order functions: yes, even used promises
@@ -42,9 +50,11 @@ On / you can find a basic homepage.
 * Responsiveness: applied: disable if mobile, resize window to screen
 
 <h5>Communication</h5>
+
 * Web Sockets: applied
 
 <h3>client (/client)</h3>
+
 On /client a client side version of the game can be found (without server authority).
 <br>In terminal you can change the player you control by typing 'myId = &#60;some number under 4&#62;'.
 <br>You can use WSAD or the arrow keys to move around. use P to stop moving. (key-bindings are auto translated to other Keyboard layouts e.g. WSAD in Qwerty will be ZQSD in Azerty)
