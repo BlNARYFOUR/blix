@@ -69,8 +69,8 @@ What to do when cloning this repo:
 ***IMPORTANT: Make sure to disconnect any CiscoVPN-connection when using Vagrant***
 
 * add 
-	<br>&emsp;\- map: test.local
-	<br>&emsp;&nbsp;&nbsp;to: /home/vagrant/code/test/public
+	<br>&emsp;\- map: blix.local
+	<br>&emsp;&nbsp;&nbsp;to: /home/vagrant/code/blix/public
   <br>to Homestead.yaml under 'sites:'
 
 * add '192.168.10.10 blix.local' to 'C:\Windows\System32\drivers\etc\hosts'
