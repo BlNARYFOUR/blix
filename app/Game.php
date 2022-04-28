@@ -392,7 +392,7 @@ class Game
     }
 
     function calcScore(Player $player) {
-        $score = 0;
+        $score = static::KILL_SCORE * $player->getKills();
         foreach ($this->playingField as $row) {
             foreach ($row as $tile) {
                 if($tile instanceof Tile) {
