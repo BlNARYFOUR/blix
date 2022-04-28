@@ -202,6 +202,14 @@ class Player implements \JsonSerializable
     public function increaseKills() {
         $this->kills++;
     }
+    
+    /**
+     * @return int
+     */
+    public function getKills(): int
+    {
+        return $this->kills;
+    }
 
     /**
      * @return int
